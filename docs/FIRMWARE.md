@@ -14,15 +14,23 @@ The successful GPU was an **AMD Barcelo/Vega 1002:15e7** on an **AOOSTAR R7**. T
 
 ## Public binary status
 
-The operator **states that they have verified rights to publicly distribute this firmware**, but no source binary is available to the ChatGPT/GitHub publication process at present. **Therefore this repository does not yet include any VBIOS binary.** Do not confuse the recorded SHA-256 with a downloadable BIOS.
+**The actual original ROM is now published:** [`firmware/vbios_1002_15e7_aoostar_vfct.bin`](../firmware/vbios_1002_15e7_aoostar_vfct.bin), **55,296 bytes**, with the SHA-256 shown above. The operator personally confirms that their authorization to distribute the ROM publicly has been verified; the maintainers of this documentation have **not independently reviewed legal title documents**. The uploaded bytes were compared to the historical digest, and the Git blob SHA is `fe9e053131fe160bddb673344351a94c33de2042`. A simple readable-strings scan showed generic AMD/Barcelo BIOS text and no obvious exposed passwords or MAC addresses; **it cannot rule out all opaque embedded device identifiers**.
 
-Before a binary is included:
-1. Obtain the **original 55,296-byte** file, not a reconstructed placeholder; never generate fake bytes from the hash.
-2. Independently calculate `sha256sum` (or SHA-256 with an equivalent trusted tool) and compare the exact digest above.
-3. Inspect whether the binary contains any embedded unit identifiers or sensitive metadata; do not publish full ACPI dumps by default.
-4. Record provenance, hardware/board revision where independently known, the scope of the owner's redistribution authorization and an explicit **firmware-specific** redistribution notice. **The MIT license of this repository does not automatically license OEM firmware.**
-5. If the image has a different checksum or size, do **not** label it as the tested ROM. Provide a separate verified variant and compatibility status.
-6. Do not flash this file; the successful use was a **QEMU romfile**, not replacement of the host firmware.
+The published binary is **firmware supplied by the hardware owner**, not software authored under this repository's MIT license. Read the separate [firmware notice](../firmware/NOTICE.md) before redistributing. The ROM is only known to work as a **QEMU/Proxmox romfile** for the tested AMD Barcelo GPU. **Do not flash it** and do not assume all AOOSTAR R7 hardware revisions or OS guests are compatible.
+
+To verify your downloaded copy and use it **only for a compatible VM**:
+
+```bash
+sha256sum vbios_1002_15e7_aoostar_vfct.bin
+# Expected: 7a699baf6337efb289c5f2f1d64c481d4933bd34328c0037a89f4007088d115c
+```
+
+1. Do not flash this file or treat it as a system motherboard BIOS. It was successfully loaded using the QEMU **romfile** parameter.
+2. Verify both byte length (55,296) and SHA-256 **before copying it to a Proxmox host**.
+3. Inspect compatibility on *your* hardware; the same PCI ID does not guarantee matching board firmware, and different BIOS revisions are **not tested**.
+4. Keep working host and VM backups, out-of-band access and a rollback path; passthrough can eliminate host HDMI console output.
+5. Don't publish full ACPI tables or arbitrary ROM dumps; the committed file is a single GPU VBIOS image.
+6. The MIT license of this repository **does not automatically cover the firmware binary**; see its [NOTICE](../firmware/NOTICE.md).
 
 ## Non-destructive local extraction helper
 

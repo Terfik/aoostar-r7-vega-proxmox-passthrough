@@ -112,7 +112,7 @@ The working ROM came from the **unit's own ACPI VFCT table**. It is **legacy AMD
 | SHA-256 | `7a699baf6337efb289c5f2f1d64c481d4933bd34328c0037a89f4007088d115c` |
 | Observed guest log | `ATOM BIOS: 113-BARCELO-004` |
 
-**ROM binary status:** the owner reports that public redistribution is authorized, but the actual binary bytes **have not been supplied to this publication process**, so they are **not bundled yet**. Metadata is not firmware. Before any binary is added, it must be compared byte-for-byte/hash to the verified 55,296-byte file and reviewed for incidental machine identifiers. The project MIT license applies to the documentation and scripts, **not automatically to OEM firmware**. See [firmware provenance, extraction and limitations](docs/FIRMWARE.md).
+**Verified ROM now available:** [Download the original 55,296-byte VFCT-extracted VBIOS](firmware/vbios_1002_15e7_aoostar_vfct.bin) ([GitHub raw file](https://raw.githubusercontent.com/Terfik/aoostar-r7-vega-proxmox-passthrough/main/firmware/vbios_1002_15e7_aoostar_vfct.bin)). The supplied original was compared with the recorded **SHA-256 `7a699baf6337efb289c5f2f1d64c481d4933bd34328c0037a89f4007088d115c`** and inspected for obvious visible sensitive strings; its Git object was independently checked against the 55,296-byte source (`fe9e053131fe160bddb673344351a94c33de2042`). The operator confirms authorization for public redistribution. The repository's MIT license **does not apply to the OEM ROM**; read [firmware provenance, redistribution and limitations](docs/FIRMWARE.md) and [firmware notice](firmware/NOTICE.md) before use. This is a guest VM **romfile**, **not** a BIOS flashing image.
 
 A **non-destructive local extraction script** exists at [`scripts/extract_vfct_vbios.py`](scripts/extract_vfct_vbios.py), with synthetic tests. It has **not been validated against the actual AOOSTAR ROM**, so it is not a guaranteed way to recreate this particular working image.
 
@@ -228,7 +228,9 @@ To use another VM with GPU (including potential Batocera), keep the existing suc
 
 | File | Purpose |
 |---|---|
-| [Firmware notes](docs/FIRMWARE.md) | ROM identity, legal scope, local extraction and validation |
+| [VBIOS ROM (55,296 bytes)](firmware/vbios_1002_15e7_aoostar_vfct.bin) | Verified original VFCT image, SHA-256 documented; **not for flashing** |
+| [Firmware notice](firmware/NOTICE.md) | Provenance and separate redistribution/licensing notice |
+| [Firmware notes](docs/FIRMWARE.md) | ROM identity, owner authorization statement, local extraction and validation |
 | [Portability](docs/PORTABILITY.md) | Safe single-owner GPU switching and Batocera limitations |
 | [Troubleshooting](docs/TROUBLESHOOTING.md) | Failure modes that were actually observed |
 | [GRUB example](examples/grub-cmdline.txt) | Verified kernel flags, **not** a full GRUB config |
@@ -253,4 +255,4 @@ The synthetic parser tests and Bash syntax check passed offline on **30 October 
 - [Linux AMD BIOS handling](https://github.com/torvalds/linux/blob/master/drivers/gpu/drm/amd/amdgpu/amdgpu_bios.c)
 - [Batocera VM warnings](https://wiki.batocera.org/run_batocera_in_vm)
 
-Hardware and outcomes were reported by the AOOSTAR operator, with command outputs and functional TV/Zigbee tests dated October 2026. Documentation/scripts copyright © 2026 Contributors; [MIT license](LICENSE). **Not affiliated with AOOSTAR, AMD, Proxmox, Debian or Batocera.** Any separately published OEM firmware must carry its own provenance and redistribution notice; it is **not** automatically MIT-licensed.
+Hardware and outcomes were reported by the AOOSTAR operator, with command outputs and functional TV/Zigbee tests dated October 2026. Documentation/scripts copyright © 2026 Contributors; [MIT license](LICENSE). **Not affiliated with AOOSTAR, AMD, Proxmox, Debian or Batocera.** The published OEM ROM has its [own provenance/redistribution notice](firmware/NOTICE.md) and is **not MIT-licensed** under this project's software license.
