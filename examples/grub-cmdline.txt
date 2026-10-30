@@ -1,0 +1,5 @@
+# EXACTLY the kernel line tested on this host, not a full GRUB file.
+# VERIFY your real bootloader first; back up existing GRUB and keep all existing arguments.
+# This example is only for GPU ID 1002:15e7, with headless and rescue access.
+GRUB_CMDLINE_LINUX_DEFAULT="quiet vfio-pci.ids=1002:15e7 vfio-pci.disable_idle_d3=1"
+# Only on a host actually using GRUB: update-grub, verify grub.cfg, then controlled reboot.

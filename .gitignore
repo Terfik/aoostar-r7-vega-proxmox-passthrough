@@ -1,0 +1,21 @@
+# Avoid accidentally adding ROMs, host dumps, private backups and credentials.
+*.bin
+*.rom
+*.fd
+*.img
+*.img.gz
+*.qcow2
+*.vma*
+*.zst
+*.tar*
+*.zip
+*.key
+*.pem
+*.p12
+*.pfx
+VFCT
+*.acpi
+__pycache__/
+*.pyc
+# Exception only after owner has provided original file + verified SHA/provenance:
+!firmware/vbios_1002_15e7_aoostar_vfct.bin
